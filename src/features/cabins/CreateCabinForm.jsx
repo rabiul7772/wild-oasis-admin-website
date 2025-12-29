@@ -1,16 +1,13 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 
-import { createEditCabin } from '../../services/apiCabins';
 import useCreateCabin from './useCreateCabin';
 
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Form from '../../ui/Form';
+import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import { Textarea } from '../../ui/Textarea';
-import FormRow from '../../ui/FormRow';
 import useEditCabin from './useEditCabin';
 
 function CreateCabinForm({ cabinToEdit = {} }) {
@@ -79,7 +76,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
             required: 'This field is required',
             min: {
               value: 1,
-              message: 'Capacity should be at least 1'
+              message: 'Price should be at least 1'
             }
           })}
         />
@@ -105,7 +102,6 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         error={errors?.description?.message}
       >
         <Textarea
-          type="number"
           id="description"
           defaultValue=""
           {...register('description', {

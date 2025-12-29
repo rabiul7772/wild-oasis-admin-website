@@ -6,7 +6,7 @@ import { duplicateCabin as duplicateCabinApi } from '../../services/apiCabins';
 const useDuplicateCabin = () => {
   const queryClient = useQueryClient();
   // Mutations
-  const { mutate: duplicateCabin, isLoading: isDuplicating } = useMutation({
+  const { mutate: duplicateCabin, isPending: isDuplicating } = useMutation({
     mutationFn: duplicateCabinApi,
     onSuccess: () => {
       toast.success('Cabin successfully duplicated.');
