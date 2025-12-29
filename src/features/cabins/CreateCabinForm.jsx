@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { createEditCabin } from '../../services/apiCabins';
+import useCreateCabin from './useCreateCabin';
 
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
@@ -10,6 +11,7 @@ import Form from '../../ui/Form';
 import Input from '../../ui/Input';
 import { Textarea } from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
+import useEditCabin from './useEditCabin';
 
 function CreateCabinForm({ cabinToEdit = {} }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -23,31 +25,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     formState: { errors }
   } = useForm({ defaultValues: isEditSession ? editValues : {} });
 
-  const queryClient = useQueryClient();
-
-  // Mutations
-  const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: ({ newCabinData, _ }) => createEditCabin(newCabinData), // here we don't need to pass id that's why use "_" to handle supabase server error
-    onSuccess: () => {
-      toast.success('New Cabin successfully created.');
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-      reset();
-    },
-    onError: err => toast.error(err.message)
-  });
-
-  // Mutations
-  const { mutate: editCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success(' Cabin successfully edited.');
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-      reset();
-    },
-    onError: err => toast.error(err.message)
-  });
+  const { isCreating, createCabin } = useCreateCabin(reset);
+  const { isEditing, editCabin } = useEditCabin(reset);
 
   const isWorking = isEditing || isCreating;
 
@@ -129,7 +108,6 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           type="number"
           id="description"
           defaultValue=""
-          disabled={isWorking}
           {...register('description', {
             required: 'This field is required'
           })}

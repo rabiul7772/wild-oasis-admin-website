@@ -31,6 +31,7 @@ export async function createEditCabin(newCabin, id) {
   }
 
   // 2) upload image
+  if (hasImagePath) return data;
 
   const { error: storageError } = await supabase.storage
     .from('cabin-images')
@@ -84,4 +85,27 @@ export const deleteCabin = async id => {
     console.error(cabinError);
     throw new Error('Cabin could not be deleted.');
   }
+};
+
+export const duplicateCabin = async cabin => {
+  const name = `copy of ${cabin.name}`;
+
+  const { id, ...otherCabinValues } = cabin;
+
+  const duplicateCabinValues = {
+    ...otherCabinValues,
+    name
+  };
+
+  const { data, error } = await supabase
+    .from('cabins')
+    .insert([duplicateCabinValues])
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Cabins could not be duplicated.');
+  }
+
+  return data;
 };
