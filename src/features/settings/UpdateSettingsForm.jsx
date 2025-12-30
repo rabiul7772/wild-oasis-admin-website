@@ -6,6 +6,7 @@ import Button from '../../ui/Button';
 import useUpdateSettings from './useUpdateSettings';
 import useSettings from './useSettings';
 import Spinner from '../../ui/Spinner';
+import ButtonSubmit from '../../ui/ButtonSubmit';
 
 function UpdateSettingsForm() {
   const { settings = {}, isPending } = useSettings(); // initially settings empty that's why default value settings = {}
@@ -107,20 +108,20 @@ function UpdateSettingsForm() {
         />
       </FormRow>
 
-      <FormRow>
+      <ButtonSubmit>
         {/* type is an HTML attribute! */}
         <Button
           disabled={isUpdating}
           variation="secondary"
-          size="medium"
+          size="small"
           type="reset"
         >
           Reset
         </Button>
-        <Button disabled={isUpdating} variation="primary" size="medium">
-          Submit settings
+        <Button disabled={isUpdating} variation="primary" size="small">
+          Submit
         </Button>
-      </FormRow>
+      </ButtonSubmit>
 
       {/* <FormRow label="Minimum nights/booking">
         <Input type="number" id="min-nights" />
