@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form';
 
 import useCreateCabin from './useCreateCabin';
+import { Textarea } from '../../ui/Textarea';
+import useEditCabin from './useEditCabin';
 
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
-import { Textarea } from '../../ui/Textarea';
-import useEditCabin from './useEditCabin';
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
@@ -22,8 +22,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     formState: { errors }
   } = useForm({ defaultValues: isEditSession ? editValues : {} });
 
-  const { isCreating, createCabin } = useCreateCabin(reset);
-  const { isEditing, editCabin } = useEditCabin(reset);
+  const { isCreating, createCabin } = useCreateCabin(reset, onCloseModal);
+  const { isEditing, editCabin } = useEditCabin(reset, onCloseModal);
 
   const isWorking = isEditing || isCreating;
 
@@ -40,7 +40,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? 'modal' : 'regular'}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
