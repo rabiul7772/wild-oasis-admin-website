@@ -5,6 +5,7 @@ import useOperationsCabin from './useOperationsCabin';
 import Menus from '../../ui/Menus';
 import Spinner from '../../ui/Spinner';
 import Table from '../../ui/Table';
+import Empty from '../../ui/Empty';
 
 const CabinTable = () => {
   const { isPending, cabins } = useCabins();
@@ -12,6 +13,7 @@ const CabinTable = () => {
   const filteredAndSortedCabins = useOperationsCabin(cabins);
 
   if (isPending) return <Spinner />;
+  if (!filteredAndSortedCabins.length) return <Empty resourceName="cabins" />;
 
   return (
     <Menus>
