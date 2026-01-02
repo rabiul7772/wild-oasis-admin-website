@@ -68,7 +68,7 @@ async function createBookings() {
       isPast(new Date(booking.endDate)) &&
       !isToday(new Date(booking.endDate))
     )
-      status = 'checked-out';
+      status = 'checked_out';
     if (
       isFuture(new Date(booking.startDate)) ||
       isToday(new Date(booking.startDate))
@@ -80,7 +80,7 @@ async function createBookings() {
       isPast(new Date(booking.startDate)) &&
       !isToday(new Date(booking.startDate))
     )
-      status = 'checked-in';
+      status = 'checked_in';
 
     return {
       ...booking,
@@ -106,13 +106,13 @@ function Uploader() {
   async function uploadAll() {
     setIsLoading(true);
     // Bookings need to be deleted FIRST
-    // await deleteBookings();
-    // await deleteGuests();
+    await deleteBookings();
+    await deleteGuests();
     // await deleteCabins();
 
     // Bookings need to be created LAST
     await createGuests();
-    await createCabins();
+    // await createCabins();
     await createBookings();
 
     setIsLoading(false);
