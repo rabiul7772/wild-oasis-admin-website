@@ -19,7 +19,7 @@ const sortOptions = [
 const CabinTableOperations = () => {
   return (
     <>
-      <Filter filterFiled="discount" options={filterOptions} />
+      <Filter filterField="discount" options={filterOptions} />
       <Sort sortByField="sortBy" sortOptions={sortOptions} />
     </>
   );
