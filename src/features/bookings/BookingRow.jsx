@@ -1,15 +1,16 @@
-import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
+import styled from 'styled-components';
 
-import Tag from '../../ui/Tag';
 import Table from '../../ui/Table';
+import Tag from '../../ui/Tag';
 
-import { formatCurrency } from '../../utils/helpers';
-import { formatDistanceFromNow } from '../../utils/helpers';
-import { useNavigate } from 'react-router';
-import { HiEye } from 'react-icons/hi2';
-import Modal from '../../ui/Modal';
+import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from 'react-icons/hi2';
 import Menus from '../../ui/Menus';
+import Modal from '../../ui/Modal';
+import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
+import { useCheckout } from '../check-in-out/useCheckout';
+import Spinner from '../../ui/Spinner';
+import { useNavigate } from 'react-router';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -52,13 +53,17 @@ function BookingRow({
     cabins: { name: cabinName }
   }
 }) {
+  const navigate = useNavigate();
+
+  const { checkout, isCheckingOut } = useCheckout();
+
+  if (isCheckingOut) return <Spinner />;
+
   const statusToTagName = {
     unconfirmed: 'blue',
     checked_in: 'green',
     checked_out: 'silver'
   };
-
-  const navigate = useNavigate();
 
   return (
     <Table.Row>
@@ -95,6 +100,23 @@ function BookingRow({
             >
               See details
             </Menus.Button>
+            {status === 'unconfirmed' && (
+              <Menus.Button
+                onClick={() => navigate(`/checkin/${bookingId}`)}
+                icon={<HiArrowDownOnSquare />}
+              >
+                Check in
+              </Menus.Button>
+            )}
+            {status === 'checked_in' && (
+              <Menus.Button
+                onClick={() => checkout(bookingId)}
+                icon={<HiArrowUpOnSquare />}
+                disabled={isCheckingOut}
+              >
+                Check out
+              </Menus.Button>
+            )}
           </Menus.List>
         </Menus.Menu>
       </Modal>

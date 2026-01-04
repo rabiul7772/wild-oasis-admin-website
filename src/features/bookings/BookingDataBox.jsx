@@ -11,6 +11,7 @@ import DataItem from '../../ui/DataItem';
 import { Flag } from '../../ui/Flag';
 
 import { formatDistanceFromNow, formatCurrency } from '../../utils/helpers';
+import Checkbox from '../../ui/Checkbox';
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -137,7 +138,6 @@ function BookingDataBox({ booking }) {
           ) &mdash; {format(new Date(endDate), 'EEE, MMM dd yyyy')}
         </p>
       </Header>
-
       <Section>
         <Guest>
           {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
@@ -176,7 +176,6 @@ function BookingDataBox({ booking }) {
           <p>{isPaid ? 'Paid' : 'Will pay at property'}</p>
         </Price>
       </Section>
-
       <Footer>
         <p>Booked {format(new Date(created_at), 'EEE, MMM dd yyyy, p')}</p>
       </Footer>
