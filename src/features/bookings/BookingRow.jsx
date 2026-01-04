@@ -4,13 +4,20 @@ import styled from 'styled-components';
 import Table from '../../ui/Table';
 import Tag from '../../ui/Tag';
 
-import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from 'react-icons/hi2';
+import {
+  HiArrowDownOnSquare,
+  HiArrowUpOnSquare,
+  HiEye,
+  HiTrash
+} from 'react-icons/hi2';
 import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import { useCheckout } from '../check-in-out/useCheckout';
 import Spinner from '../../ui/Spinner';
 import { useNavigate } from 'react-router';
+import ConfirmDelete from '../../ui/ConfirmDelete';
+import useDeleteBooking from './useDeleteBooking';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -54,10 +61,11 @@ function BookingRow({
   }
 }) {
   const navigate = useNavigate();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const { checkout, isCheckingOut } = useCheckout();
 
-  if (isCheckingOut) return <Spinner />;
+  if (isCheckingOut || isDeleting) return <Spinner />;
 
   const statusToTagName = {
     unconfirmed: 'blue',
@@ -117,7 +125,18 @@ function BookingRow({
                 Check out
               </Menus.Button>
             )}
+
+            <Modal.Open opens="delete">
+              <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
+            </Modal.Open>
           </Menus.List>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resourceName="booking"
+              disabled={isDeleting}
+              onConfirm={() => deleteBooking(bookingId)}
+            />
+          </Modal.Window>
         </Menus.Menu>
       </Modal>
     </Table.Row>

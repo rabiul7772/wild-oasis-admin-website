@@ -30,10 +30,15 @@ function ConfirmDelete({ resource, onConfirm, disabled, onCloseModal }) {
       </p>
 
       <div>
-        <Button variation="secondary" onClick={onCloseModal}>
+        <Button variation="secondary" size="small" onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button variation="danger" onClick={onConfirm} disabled={disabled}>
+        <Button
+          variation="danger"
+          size="small"
+          onClick={onConfirm}
+          disabled={disabled}
+        >
           Delete
         </Button>
       </div>
