@@ -113,12 +113,12 @@ function UpdateSettingsForm() {
         <Button
           disabled={isUpdating}
           variation="secondary"
-          size="small"
+          size="medium"
           type="reset"
         >
           Reset
         </Button>
-        <Button disabled={isUpdating} variation="primary" size="small">
+        <Button disabled={isUpdating} variation="primary" size="medium">
           Submit
         </Button>
       </ButtonSubmit>
