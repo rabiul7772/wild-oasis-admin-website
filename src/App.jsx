@@ -21,7 +21,7 @@ import { DarkModeContextProvider } from './context/DarkModeContext';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: 60 * 1000
+
       staleTime: 0
     }
   }
@@ -55,7 +55,7 @@ const App = () => {
             <Route path="users" element={<Users />} />
           </Route>
 
-          <Route path="Login" element={<Login />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

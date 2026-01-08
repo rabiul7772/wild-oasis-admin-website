@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getCurrentUser } from '../../services/apiAuth';
 import useUser from './useUser';
 
 const StyledUserAvatar = styled.div`
@@ -24,6 +23,8 @@ const Avatar = styled.img`
 
 const UserAvatar = () => {
   const { user } = useUser();
+
+  if (!user) return null;
 
   const { fullName, avatar } = user.user_metadata;
 
