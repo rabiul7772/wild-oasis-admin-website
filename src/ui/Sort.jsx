@@ -5,10 +5,10 @@ const Select = styled.select`
   font-size: 1.4rem;
   padding: 0.8rem 1.2rem;
   border: 1px solid
-    ${(props) =>
-      props.type === "white"
-        ? "var(--color-grey-100)"
-        : "var(--color-grey-300)"};
+    ${props =>
+      props.type === 'white'
+        ? 'var(--color-grey-100)'
+        : 'var(--color-grey-300)'};
   border-radius: var(--border-radius-sm);
   background-color: var(--color-grey-0);
   font-weight: 500;
@@ -17,7 +17,7 @@ const Select = styled.select`
 
 const Sort = ({ sortByField, sortOptions }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentSortBy = searchParams.get(sortByField) || "";
+  const currentSortBy = searchParams.get(sortByField) || '';
 
   function handleChange(e) {
     searchParams.set(sortByField, e.target.value);
@@ -26,7 +26,7 @@ const Sort = ({ sortByField, sortOptions }) => {
 
   return (
     <Select value={currentSortBy} type="white" onChange={handleChange}>
-      {sortOptions.map((option) => (
+      {sortOptions.map(option => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>

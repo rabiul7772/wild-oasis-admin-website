@@ -1,5 +1,6 @@
 import Filter from '../../ui/Filter';
 import Sort from '../../ui/Sort';
+import StyledTableOperations from '../../ui/TableOperations';
 
 const filterOptions = [
   { label: 'All', value: 'all' },
@@ -18,10 +19,10 @@ const sortOptions = [
 
 const CabinTableOperations = () => {
   return (
-    <>
+    <StyledTableOperations>
       <Filter filterField="discount" options={filterOptions} />
       <Sort sortByField="sortBy" sortOptions={sortOptions} />
-    </>
+    </StyledTableOperations>
   );
 };
 

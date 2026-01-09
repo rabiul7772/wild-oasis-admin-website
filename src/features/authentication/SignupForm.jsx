@@ -4,6 +4,7 @@ import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import useSignup from './useSignup';
+import ButtonSubmit from '../../ui/ButtonSubmit';
 
 // Email regex: /\S+@\S+\.\S+/
 
@@ -78,8 +79,8 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow>
-        {/* type is an HTML attribute! */}
+      {/* type is an HTML attribute! */}
+      <ButtonSubmit>
         <Button
           variation="secondary"
           type="reset"
@@ -90,9 +91,9 @@ function SignupForm() {
           Cancel
         </Button>
         <Button variation="primary" size="medium" disabled={isPending}>
-          Create new user
+          Create
         </Button>
-      </FormRow>
+      </ButtonSubmit>
     </Form>
   );
 }
