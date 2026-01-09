@@ -44,7 +44,7 @@ function TodayActivity() {
 
   if (isPending) return <Spinner />;
 
-  if (todayActivities.length === 0)
+  if (!todayActivities || todayActivities.length === 0)
     return <NoActivity>No activity today</NoActivity>;
 
   return (

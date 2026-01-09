@@ -133,7 +133,7 @@ function prepareData(startData, stays) {
       if ([6, 7].includes(num)) return incArrayValue(arr, '6-7 nights');
       if (num >= 8 && num <= 14) return incArrayValue(arr, '8-14 nights');
       if (num >= 15 && num <= 21) return incArrayValue(arr, '15-21 nights');
-      if (num >= 21) return incArrayValue(arr, '21+ nights');
+      if (num >= 22) return incArrayValue(arr, '22+ nights');
       return arr;
     }, startData)
     .filter(obj => obj.value > 0);

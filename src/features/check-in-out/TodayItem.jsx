@@ -28,6 +28,11 @@ const Guest = styled.div`
 function TodayItem({ activity }) {
   const { id, status, guests, numNights } = activity;
 
+  if (!guests) {
+    console.error('TodayItem: guests data is missing for activity', id);
+    return null;
+  }
+
   return (
     <StyledTodayItem>
       {status === 'unconfirmed' && <Tag type="green">Arriving</Tag>}

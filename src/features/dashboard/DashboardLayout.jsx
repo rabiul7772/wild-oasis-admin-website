@@ -34,7 +34,7 @@ const DashboardLayout = () => {
         bookings={bookings}
         confirmedStays={confirmedStays}
         numDays={numDays}
-        cabinCount={cabins.length}
+        cabinCount={cabins?.length}
       />
       <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
