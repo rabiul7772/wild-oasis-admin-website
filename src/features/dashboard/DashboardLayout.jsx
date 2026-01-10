@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import Spinner from '../../ui/Spinner';
+import useCabins from '../cabins/useCabins';
+import TodayActivity from '../check-in-out/TodayActivity';
+import DurationChart from './DurationChart';
+import SalesChart from './SalesChart';
+import Stats from './Stats';
 import { useRecentBookings } from './useRecentBookings';
 import { useRecentStays } from './useRecentStays';
-import Spinner from '../../ui/Spinner';
-import Stats from './Stats';
-import useCabins from '../cabins/useCabins';
-import SalesChart from './SalesChart';
-import DurationChart from './DurationChart';
-import TodayActivity from '../check-in-out/TodayActivity';
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -17,12 +17,7 @@ const StyledDashboardLayout = styled.div`
 
 const DashboardLayout = () => {
   const { isPending, bookings } = useRecentBookings();
-  const {
-    isPending: staysPending,
-    stays,
-    confirmedStays,
-    numDays
-  } = useRecentStays();
+  const { isPending: staysPending, confirmedStays, numDays } = useRecentStays();
 
   const { cabins, isPending: cabinsPending } = useCabins();
 

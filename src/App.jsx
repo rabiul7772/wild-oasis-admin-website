@@ -10,13 +10,13 @@ import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
 import GlobalStyles from '../src/styles/GlobalStyles';
 import AppLayout from './ui/AppLayout';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Toaster } from 'react-hot-toast';
 import Booking from './features/bookings/Booking';
 import Checkin from './pages/Checkin';
 import ProtectedRoute from './ui/ProtectedRoute';
 import { DarkModeContextProvider } from './context/DarkModeContext';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient({
   defaultOptions: {

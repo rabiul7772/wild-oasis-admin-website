@@ -45,7 +45,12 @@ function TodayActivity() {
   if (isPending) return <Spinner />;
 
   if (!todayActivities || todayActivities.length === 0)
-    return <NoActivity>No activity today</NoActivity>;
+    return (
+      <NoActivity>
+        No activity today. Click upload all at the bottom left & then reload the
+        browser to see sample activity.
+      </NoActivity>
+    );
 
   return (
     <StyledToday>
